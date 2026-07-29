@@ -56,7 +56,7 @@ const products: Product[] = [
     name: "Jugo natural",
     subtitle: "Botella individual de 500 ml",
     price: 10,
-    image: "/images/jugos-naturales.jpeg",
+    image: "/images/jugo-natural-orange.jpeg",
     accent: "green",
     badge: "100% natural",
     description:
