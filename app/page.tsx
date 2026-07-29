@@ -7,11 +7,12 @@ type Product = {
   name: string;
   subtitle: string;
   price: number;
-  image: string;
+  images: string[];
   accent: "green" | "gold" | "red";
   badge: string;
   description: string;
   ingredients: string;
+  facts: string[];
 };
 
 const products: Product[] = [
@@ -20,85 +21,119 @@ const products: Product[] = [
     name: "Fresh Pack",
     subtitle: "5 porciones listas para licuar",
     price: 29.99,
-    image: "/images/fresh-pack-hero.jpeg",
+    images: [
+      "/images/fresh-pack-hero.jpeg",
+      "/images/fresh-pack-hand.jpeg",
+      "/images/fresh-pack-display.jpeg",
+    ],
     accent: "green",
     badge: "El favorito",
     description:
       "Frutas y vegetales picados y congelados para que prepares tu jugo verde en minutos. Solo agrega agua, licúa y disfruta.",
     ingredients: "Piña, manzana verde, pepino, apio, espinaca y jengibre.",
+    facts: ["5 porciones individuales", "Agrega 250 ml de agua", "Mantener congelado"],
   },
   {
     id: "golden-shot",
     name: "Golden Shot",
     subtitle: "Pack de 5 shots funcionales",
     price: 14.99,
-    image: "/images/golden-shot.jpeg",
+    images: [
+      "/images/golden-shot-pack.jpeg",
+      "/images/golden-shot.jpeg",
+      "/images/golden-shot-group.jpeg",
+    ],
     accent: "gold",
     badge: "Energía natural",
     description:
       "Shot amarillo de cúrcuma y jengibre para comenzar la mañana con energía natural y apoyar una rutina activa.",
     ingredients: "Jengibre, cúrcuma, naranja y pimienta negra.",
+    facts: ["Pack de 5 botellas", "2 oz por shot", "Pensado para tus mañanas"],
   },
   {
     id: "blood-shot",
     name: "Blood Shot",
     subtitle: "Pack de 5 shots funcionales",
     price: 14.99,
-    image: "/images/blood-shot.jpeg",
+    images: [
+      "/images/blood-shot-pack.jpeg",
+      "/images/blood-shot.jpeg",
+      "/images/blood-shot-group.jpeg",
+    ],
     accent: "red",
     badge: "Vitalidad",
     description:
       "Shot rojo de remolacha y jengibre. Una mezcla refrescante pensada para acompañar tu bienestar cardiovascular y revitalizar tu piel.",
     ingredients: "Remolacha, manzana roja, jengibre y limón.",
+    facts: ["Pack de 5 botellas", "2 oz por shot", "Con jengibre"],
   },
   {
     id: "jugo-natural",
     name: "Jugo natural",
     subtitle: "Botella individual de 500 ml",
     price: 10,
-    image: "/images/jugo-natural-orange.jpeg",
+    images: [
+      "/images/juices-on-ice.jpeg",
+      "/images/jugo-natural-orange.jpeg",
+      "/images/red-energy-full.jpeg",
+    ],
     accent: "green",
     badge: "100% natural",
     description:
       "Una alternativa fresca y deliciosa para reemplazar bebidas procesadas, acompañar tus comidas e hidratarte naturalmente.",
-    ingredients: "Sin azúcar añadida y sin conservantes.",
+    ingredients: "Elaborado con ingredientes naturales.",
+    facts: ["Botella de 500 ml", "Sin azúcar añadida", "Sin conservantes"],
   },
   {
     id: "red-energy",
     name: "Red Energy",
     subtitle: "Jugo natural de 500 ml",
     price: 10,
-    image: "/images/red-energy.jpeg",
+    images: [
+      "/images/red-energy.jpeg",
+      "/images/red-energy-full.jpeg",
+      "/images/red-energy-group.jpeg",
+    ],
     accent: "red",
     badge: "Refrescante",
     description:
       "Una bebida natural y refrescante, hecha con ingredientes frescos para acompañar tus comidas y sumar energía natural a tu día.",
     ingredients:
       "Remolacha, naranja, manzana roja, piña, jengibre y limón.",
+    facts: ["Botella de 500 ml", "Ingredientes frescos", "Sin conservantes"],
   },
   {
     id: "sunrise",
     name: "Sunrise",
     subtitle: "Jugo natural de 500 ml",
     price: 10,
-    image: "/images/sunrise.jpeg",
+    images: [
+      "/images/jugo-natural-orange.jpeg",
+      "/images/sunrise-detail.jpeg",
+    ],
     accent: "gold",
     badge: "Hidratación natural",
     description:
       "Una opción natural, fresca y sin conservantes para reemplazar bebidas procesadas y acompañar tus comidas.",
-    ingredients: "Naranja, piña, limón y jengibre.",
+    ingredients: "Piña, naranja, cúrcuma, jengibre y limón.",
+    facts: ["Botella de 500 ml", "Sin azúcar añadida", "Sin conservantes"],
   },
   {
     id: "jugo-detox",
     name: "Jugo Detox",
     subtitle: "Jugo verde natural",
     price: 10,
-    image: "/images/fresh-pack-hero.jpeg",
+    images: [
+      "/images/fresh-pack-hero.jpeg",
+      "/images/detox-poster.jpeg",
+      "/images/detox-information.jpeg",
+    ],
     accent: "green",
     badge: "Jugo verde",
     description:
       "Jugo verde elaborado con ingredientes 100% naturales para acompañar tu bienestar diario de una forma fresca y práctica.",
-    ingredients: "Ingredientes 100% naturales.",
+    ingredients: "Piña, apio, espinaca, manzana verde y pepino.",
+    facts: ["100% natural", "Jugo verde", "Disponibilidad por confirmar"],
   },
 ];
 
@@ -107,11 +142,89 @@ const money = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
+function ProductCard({
+  product,
+  index,
+  quantity,
+  onChangeQuantity,
+}: {
+  product: Product;
+  index: number;
+  quantity: number;
+  onChangeQuantity: (id: string, delta: number) => void;
+}) {
+  const [activeImage, setActiveImage] = useState(0);
+
+  return (
+    <article className={`product-card ${product.accent}`}>
+      <div className="product-gallery">
+        <div className="product-image">
+          <img src={product.images[activeImage]} alt={`${product.name}, foto ${activeImage + 1}`} />
+          <span className="product-number">0{index + 1}</span>
+          <span className="product-badge">{product.badge}</span>
+          <span className="photo-count">{activeImage + 1}/{product.images.length}</span>
+        </div>
+        <div className="product-thumbnails" aria-label={`Fotos de ${product.name}`}>
+          {product.images.map((image, imageIndex) => (
+            <button
+              key={image}
+              className={imageIndex === activeImage ? "active" : ""}
+              onClick={() => setActiveImage(imageIndex)}
+              aria-label={`Ver foto ${imageIndex + 1} de ${product.name}`}
+            >
+              <img src={image} alt="" />
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="product-info">
+        <div className="product-title">
+          <div>
+            <h3>{product.name}</h3>
+            <p>{product.subtitle}</p>
+          </div>
+          <strong>{money.format(product.price)}</strong>
+        </div>
+        <p className="product-description">{product.description}</p>
+        <ul className="product-facts">
+          {product.facts.map((fact) => <li key={fact}>{fact}</li>)}
+        </ul>
+        <details>
+          <summary>Ver ingredientes</summary>
+          <p>{product.ingredients}</p>
+        </details>
+        {quantity ? (
+          <div className="quantity-control">
+            <button
+              onClick={() => onChangeQuantity(product.id, -1)}
+              aria-label={`Quitar un ${product.name}`}
+            >
+              −
+            </button>
+            <span>{quantity} en el carrito</span>
+            <button
+              onClick={() => onChangeQuantity(product.id, 1)}
+              aria-label={`Agregar otro ${product.name}`}
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          <button className="add-button" onClick={() => onChangeQuantity(product.id, 1)}>
+            Agregar al pedido <span>+</span>
+          </button>
+        )}
+      </div>
+    </article>
+  );
+}
+
 export default function Home() {
   const [cart, setCart] = useState<Record<string, number>>({});
   const [cartOpen, setCartOpen] = useState(false);
   const [name, setName] = useState("");
   const [delivery, setDelivery] = useState("Pickup");
+  const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("Zelle");
   const [notes, setNotes] = useState("");
 
@@ -153,6 +266,7 @@ export default function Home() {
       "",
       `Total estimado: ${money.format(total)}`,
       `Entrega: ${delivery}`,
+      delivery === "Delivery" && address ? `Dirección: ${address}` : "",
       `Método de pago: ${payment}`,
       name ? `Nombre: ${name}` : "",
       notes ? `Notas: ${notes}` : "",
@@ -254,51 +368,13 @@ export default function Home() {
 
         <div className="product-grid">
           {products.map((product, index) => (
-            <article className={`product-card ${product.accent}`} key={product.id}>
-              <div className="product-image">
-                <img src={product.image} alt={product.name} />
-                <span className="product-number">0{index + 1}</span>
-                <span className="product-badge">{product.badge}</span>
-              </div>
-              <div className="product-info">
-                <div className="product-title">
-                  <div>
-                    <h3>{product.name}</h3>
-                    <p>{product.subtitle}</p>
-                  </div>
-                  <strong>{money.format(product.price)}</strong>
-                </div>
-                <p className="product-description">{product.description}</p>
-                <details>
-                  <summary>Ver ingredientes</summary>
-                  <p>{product.ingredients}</p>
-                </details>
-                {cart[product.id] ? (
-                  <div className="quantity-control">
-                    <button
-                      onClick={() => changeQuantity(product.id, -1)}
-                      aria-label={`Quitar un ${product.name}`}
-                    >
-                      −
-                    </button>
-                    <span>{cart[product.id]} en el carrito</span>
-                    <button
-                      onClick={() => changeQuantity(product.id, 1)}
-                      aria-label={`Agregar otro ${product.name}`}
-                    >
-                      +
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    className="add-button"
-                    onClick={() => changeQuantity(product.id, 1)}
-                  >
-                    Agregar al pedido <span>+</span>
-                  </button>
-                )}
-              </div>
-            </article>
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={index}
+              quantity={cart[product.id] || 0}
+              onChangeQuantity={changeQuantity}
+            />
           ))}
         </div>
       </section>
@@ -394,10 +470,10 @@ export default function Home() {
                 .filter((product) => cart[product.id])
                 .map((product) => (
                   <div className="cart-item" key={product.id}>
-                    <img src={product.image} alt="" />
+                    <img src={product.images[0]} alt="" />
                     <div>
                       <h3>{product.name}</h3>
-                      <p>{money.format(product.price)}</p>
+                      <p>{product.subtitle} · {money.format(product.price)}</p>
                       <div className="mini-quantity">
                         <button onClick={() => changeQuantity(product.id, -1)}>−</button>
                         <span>{cart[product.id]}</span>
@@ -425,6 +501,16 @@ export default function Home() {
                   <option>Delivery</option>
                 </select>
               </label>
+              {delivery === "Delivery" && (
+                <label>
+                  Dirección de entrega
+                  <input
+                    value={address}
+                    onChange={(event) => setAddress(event.target.value)}
+                    placeholder="Dirección y código postal"
+                  />
+                </label>
+              )}
               <label>
                 Método de pago
                 <select value={payment} onChange={(event) => setPayment(event.target.value)}>
@@ -446,6 +532,11 @@ export default function Home() {
             <div className="cart-total">
               <span>Total estimado</span>
               <strong>{money.format(total)}</strong>
+            </div>
+            <div className="order-summary">
+              <span>{delivery}</span>
+              <span>{payment}</span>
+              <span>Delivery por confirmar</span>
             </div>
             <button className="whatsapp-button" onClick={orderOnWhatsApp}>
               Enviar pedido por WhatsApp <span>↗</span>
