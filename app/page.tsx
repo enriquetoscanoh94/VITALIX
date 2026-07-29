@@ -6,6 +6,9 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 type Language = "es" | "en";
 type Localized = Record<Language, string>;
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const assetPath = (path: string) => `${basePath}${path}`;
+
 type Product = {
   id: string;
   name: string;
@@ -29,9 +32,9 @@ const products: Product[] = [
     },
     price: 29.99,
     images: [
-      "/images/fresh-pack-hero.jpeg",
-      "/images/fresh-pack-hand.jpeg",
-      "/images/fresh-pack-display.jpeg",
+      assetPath("/images/fresh-pack-hero.jpeg"),
+      assetPath("/images/fresh-pack-hand.jpeg"),
+      assetPath("/images/fresh-pack-display.jpeg"),
     ],
     accent: "green",
     badge: { es: "El favorito", en: "The favorite" },
@@ -57,9 +60,9 @@ const products: Product[] = [
     },
     price: 14.99,
     images: [
-      "/images/golden-shot-pack.jpeg",
-      "/images/golden-shot.jpeg",
-      "/images/golden-shot-group.jpeg",
+      assetPath("/images/golden-shot-pack.jpeg"),
+      assetPath("/images/golden-shot.jpeg"),
+      assetPath("/images/golden-shot-group.jpeg"),
     ],
     accent: "gold",
     badge: { es: "Energía natural", en: "Natural energy" },
@@ -85,9 +88,9 @@ const products: Product[] = [
     },
     price: 14.99,
     images: [
-      "/images/blood-shot-pack.jpeg",
-      "/images/blood-shot.jpeg",
-      "/images/blood-shot-group.jpeg",
+      assetPath("/images/blood-shot-pack.jpeg"),
+      assetPath("/images/blood-shot.jpeg"),
+      assetPath("/images/blood-shot-group.jpeg"),
     ],
     accent: "red",
     badge: { es: "Vitalidad", en: "Vitality" },
@@ -113,8 +116,8 @@ const products: Product[] = [
     },
     price: 10,
     images: [
-      "/images/jugo-natural-orange.jpeg",
-      "/images/sunrise-detail.jpeg",
+      assetPath("/images/jugo-natural-orange.jpeg"),
+      assetPath("/images/sunrise-detail.jpeg"),
     ],
     accent: "gold",
     badge: { es: "Hidratación natural", en: "Natural hydration" },
@@ -140,9 +143,9 @@ const products: Product[] = [
     },
     price: 10,
     images: [
-      "/images/red-energy.jpeg",
-      "/images/red-energy-full.jpeg",
-      "/images/red-energy-group.jpeg",
+      assetPath("/images/red-energy.jpeg"),
+      assetPath("/images/red-energy-full.jpeg"),
+      assetPath("/images/red-energy-group.jpeg"),
     ],
     accent: "red",
     badge: { es: "Refrescante", en: "Refreshing" },
@@ -503,7 +506,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Vitalix">
-          <img src="/images/vitalix-logo-transparent.png" alt="Vitalix" />
+          <img src={assetPath("/images/vitalix-logo-transparent.png")} alt="Vitalix" />
         </a>
         <nav aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
           <a href="#productos">{t.navProducts}</a>
@@ -565,7 +568,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <img
-            src="/images/fresh-pack-display.jpeg"
+            src={assetPath("/images/fresh-pack-display.jpeg")}
             alt="Fresh Pack de Vitalix con frutas frescas"
           />
           <div className="hero-stamp">
@@ -635,7 +638,7 @@ export default function Home() {
 
       <section className="story-section" id="nosotros">
         <div className="story-image">
-          <img src="/images/shots-duo.jpeg" alt="Golden Shot y Blood Shot Vitalix" />
+          <img src={assetPath("/images/shots-duo.jpeg")} alt="Golden Shot y Blood Shot Vitalix" />
           <span>Fresh · Natural · Vitalix</span>
         </div>
         <div className="story-copy">
@@ -669,7 +672,7 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <img src="/images/vitalix-logo-transparent.png" alt="Vitalix" />
+          <img src={assetPath("/images/vitalix-logo-transparent.png")} alt="Vitalix" />
           <p>{t.tagline}</p>
         </div>
         <div>
