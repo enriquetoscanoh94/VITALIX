@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { DM_Sans, Cormorant_Garamond } from "next/font/google";
+import { Hanken_Grotesk, Kaushan_Script } from "next/font/google";
 import "./globals.css";
 
-const sans = DM_Sans({
+// Cuerpo y titulares comparten familia (una sans en varios pesos).
+const sans = Hanken_Grotesk({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const serif = Cormorant_Garamond({
-  variable: "--font-serif",
+// Acento manuscrito para una palabra clave por sección (estilo IG de Vitalix).
+const script = Kaushan_Script({
+  variable: "--font-script",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +40,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={`${sans.variable} ${serif.variable}`}>{children}</body>
+      <body className={`${sans.variable} ${script.variable}`}>{children}</body>
     </html>
   );
 }

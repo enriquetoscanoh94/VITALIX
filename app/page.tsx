@@ -197,6 +197,7 @@ const content = {
     philosophyTitle: "Creemos que lo natural sabe mejor.",
     philosophyDescription:
       "Creamos opciones frescas, nutritivas y deliciosas para ayudarte a reemplazar las bebidas procesadas. Cada receta busca acompañar tus comidas, favorecer una rutina equilibrada y brindarte energía de forma natural.",
+    brandTagline: "Pequeños cambios · Grandes resultados",
     addedSugar: "azúcar añadida",
     preservatives: "conservantes",
     realIngredients: "ingredientes reales",
@@ -286,6 +287,7 @@ const content = {
     philosophyTitle: "We believe natural tastes better.",
     philosophyDescription:
       "We create fresh, nutritious and delicious options to help you replace processed drinks. Each recipe is designed to pair with your meals, support a balanced routine and provide natural energy.",
+    brandTagline: "Small changes · Big results",
     addedSugar: "added sugar",
     preservatives: "preservatives",
     realIngredients: "real ingredients",
@@ -595,7 +597,6 @@ export default function Home() {
       <section className="products-section" id="productos">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">{t.productsEyebrow}</span>
             <h2>
               {t.productsTitle.split("\n")[0]}<br />
               {t.productsTitle.split("\n")[1]}
@@ -619,7 +620,6 @@ export default function Home() {
 
       <section className="coming-soon">
         <div>
-          <span className="eyebrow">{t.comingEyebrow}</span>
           <h2>
             {t.comingTitle.split("\n")[0]}<br />
             <em>{t.comingTitle.split("\n")[1]}</em>
@@ -639,7 +639,6 @@ export default function Home() {
           <span>Fresh · Natural · Vitalix</span>
         </div>
         <div className="story-copy">
-          <span className="eyebrow">{t.philosophy}</span>
           <h2>{t.philosophyTitle}</h2>
           <p>{t.philosophyDescription}</p>
           <div className="story-stats">
@@ -647,13 +646,13 @@ export default function Home() {
             <div><strong>0</strong><span>{t.preservatives}</span></div>
             <div><strong>100%</strong><span>{t.realIngredients}</span></div>
           </div>
+          <span className="brand-tagline">{t.brandTagline}</span>
         </div>
       </section>
 
       <section className="steps-section" id="como-funciona">
         <div className="section-heading light">
           <div>
-            <span className="eyebrow">{t.simpleFast}</span>
             <h2>
               {t.stepsTitle.split("\n")[0]}<br />
               {t.stepsTitle.split("\n")[1]}
