@@ -92,7 +92,11 @@ img { display: block; max-width: 100%; }
   display: inline-flex; align-items: center; gap: 32px; font-weight: 700; font-size: 14px;
 }
 .primary-action span { color: var(--lime); font-size: 18px; }
-.text-action { font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+.text-action {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800;
+  border-bottom: 1px solid var(--ink); padding-bottom: 4px;
+}
+.text-action svg { width: 19px; height: 19px; color: #d62976; }
 .hero-points {
   display: flex; gap: 28px; margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--line);
   font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
@@ -235,6 +239,8 @@ footer { padding: 70px 6vw 34px; display: grid; grid-template-columns: 2fr 1fr 1
 footer > div:not(.footer-brand) { display: flex; flex-direction: column; gap: 8px; padding-top: 24px; }
 footer > div > span { color: var(--orange); text-transform: uppercase; font-size: 10px; letter-spacing: .12em; font-weight: 900; margin-bottom: 10px; }
 footer p, footer a { margin: 0; font-size: 13px; color: var(--muted); }
+.instagram-link { display: inline-flex; align-items: center; gap: 7px; width: fit-content; }
+.instagram-link svg { width: 17px; height: 17px; color: #d62976; }
 footer small { grid-column: 1 / -1; padding-top: 36px; border-top: 1px solid var(--line); color: #88928d; }
 
 .floating-cart {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { FaInstagram } from "react-icons/fa6";
 
 type Language = "es" | "en";
 type Localized = Record<Language, string>;
@@ -554,7 +555,8 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              @vitalixsc
+              <FaInstagram aria-hidden="true" />
+              <span>@vitalixsc</span>
             </a>
           </div>
           <div className="hero-points">
@@ -679,7 +681,15 @@ export default function Home() {
         <div>
           <span>{t.contact}</span>
           <a href="tel:+18434808966">+1 (843) 480-8966</a>
-          <a href="https://instagram.com/vitalixsc">@vitalixsc</a>
+          <a
+            className="instagram-link"
+            href="https://instagram.com/vitalixsc"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaInstagram aria-hidden="true" />
+            <span>@vitalixsc</span>
+          </a>
         </div>
         <div>
           <span>{t.location}</span>
