@@ -364,7 +364,7 @@ function ProductCard({
   return (
     <article className={`product-card ${product.accent}`}>
       <div className="product-gallery">
-        <div className="product-image">
+        <div className={`product-image ${product.id === "fresh-pack" && activeImage === 0 ? "preserve-photo" : ""}`}>
           <img src={product.images[activeImage]} alt={`${product.name}, ${t.photo} ${activeImage + 1}`} />
           <span className="product-badge">{product.badge[language]}</span>
         </div>
