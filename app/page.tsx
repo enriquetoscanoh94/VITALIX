@@ -29,7 +29,7 @@ const products: Product[] = [
     },
     price: 29.99,
     images: [
-      "/images/fresh-pack-hero-hq.jpg",
+      "/images/fresh-pack-hero.jpeg",
       "/images/fresh-pack-hand.jpeg",
       "/images/fresh-pack-display.jpeg",
     ],
@@ -563,7 +563,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <img
-            src="/images/fresh-pack-hero-hq.jpg"
+            src="/images/fresh-pack-hero.jpeg"
             alt="Fresh Pack de Vitalix con frutas frescas"
           />
           <div className="hero-stamp">
