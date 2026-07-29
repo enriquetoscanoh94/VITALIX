@@ -63,6 +63,43 @@ const products: Product[] = [
       "Una alternativa fresca y deliciosa para reemplazar bebidas procesadas, acompañar tus comidas e hidratarte naturalmente.",
     ingredients: "Sin azúcar añadida y sin conservantes.",
   },
+  {
+    id: "red-energy",
+    name: "Red Energy",
+    subtitle: "Jugo natural de 500 ml",
+    price: 10,
+    image: "/images/red-energy.jpeg",
+    accent: "red",
+    badge: "Refrescante",
+    description:
+      "Una bebida natural y refrescante, hecha con ingredientes frescos para acompañar tus comidas y sumar energía natural a tu día.",
+    ingredients:
+      "Remolacha, naranja, manzana roja, piña, jengibre y limón.",
+  },
+  {
+    id: "sunrise",
+    name: "Sunrise",
+    subtitle: "Jugo natural de 500 ml",
+    price: 10,
+    image: "/images/sunrise.jpeg",
+    accent: "gold",
+    badge: "Hidratación natural",
+    description:
+      "Una opción natural, fresca y sin conservantes para reemplazar bebidas procesadas y acompañar tus comidas.",
+    ingredients: "Naranja, piña, limón y jengibre.",
+  },
+  {
+    id: "jugo-detox",
+    name: "Jugo Detox",
+    subtitle: "Jugo verde natural",
+    price: 10,
+    image: "/images/fresh-pack-hero.jpeg",
+    accent: "green",
+    badge: "Jugo verde",
+    description:
+      "Jugo verde elaborado con ingredientes 100% naturales para acompañar tu bienestar diario de una forma fresca y práctica.",
+    ingredients: "Ingredientes 100% naturales.",
+  },
 ];
 
 const money = new Intl.NumberFormat("en-US", {
