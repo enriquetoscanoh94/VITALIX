@@ -358,13 +358,13 @@ function ProductCard({
   language: Language;
   onChangeQuantity: (id: string, delta: number) => void;
 }) {
-  const [activeImage, setActiveImage] = useState(0);
+  const [activeImage, setActiveImage] = useState(product.id === "fresh-pack" ? 2 : 0);
   const t = content[language];
 
   return (
     <article className={`product-card ${product.accent}`}>
       <div className="product-gallery">
-        <div className={`product-image ${product.id === "fresh-pack" && activeImage === 0 ? "preserve-photo" : ""}`}>
+        <div className="product-image">
           <img src={product.images[activeImage]} alt={`${product.name}, ${t.photo} ${activeImage + 1}`} />
           <span className="product-badge">{product.badge[language]}</span>
         </div>
@@ -563,7 +563,7 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <img
-            src="/images/fresh-pack-hero.jpeg"
+            src="/images/fresh-pack-display.jpeg"
             alt="Fresh Pack de Vitalix con frutas frescas"
           />
           <div className="hero-stamp">
