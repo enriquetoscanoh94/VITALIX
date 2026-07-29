@@ -349,13 +349,11 @@ const money = new Intl.NumberFormat("en-US", {
 
 function ProductCard({
   product,
-  index,
   quantity,
   language,
   onChangeQuantity,
 }: {
   product: Product;
-  index: number;
   quantity: number;
   language: Language;
   onChangeQuantity: (id: string, delta: number) => void;
@@ -368,9 +366,7 @@ function ProductCard({
       <div className="product-gallery">
         <div className="product-image">
           <img src={product.images[activeImage]} alt={`${product.name}, ${t.photo} ${activeImage + 1}`} />
-          <span className="product-number">0{index + 1}</span>
           <span className="product-badge">{product.badge[language]}</span>
-          <span className="photo-count">{activeImage + 1}/{product.images.length}</span>
         </div>
         <div className="product-thumbnails" aria-label={`${t.photosOf} ${product.name}`}>
           {product.images.map((image, imageIndex) => (
@@ -609,11 +605,10 @@ export default function Home() {
         </div>
 
         <div className="product-grid">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
-              index={index}
               quantity={cart[product.id] || 0}
               language={language}
               onChangeQuantity={changeQuantity}
