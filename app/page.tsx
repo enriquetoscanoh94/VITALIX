@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { FaInstagram } from "react-icons/fa6";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 type Language = "es" | "en";
 type Localized = Record<Language, string>;
@@ -714,6 +714,7 @@ export default function Home() {
         rel="noreferrer"
         aria-label={t.whatsappLabel}
       >
+        <FaWhatsapp aria-hidden="true" />
         <span>WhatsApp</span><b>↗</b>
       </a>
 
