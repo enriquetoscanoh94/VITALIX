@@ -75,6 +75,7 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false);
   const [name, setName] = useState("");
   const [delivery, setDelivery] = useState("Pickup");
+  const [payment, setPayment] = useState("Zelle");
   const [notes, setNotes] = useState("");
 
   const itemCount = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
@@ -115,6 +116,7 @@ export default function Home() {
       "",
       `Total estimado: ${money.format(total)}`,
       `Entrega: ${delivery}`,
+      `Método de pago: ${payment}`,
       name ? `Nombre: ${name}` : "",
       notes ? `Notas: ${notes}` : "",
       "",
@@ -315,6 +317,7 @@ export default function Home() {
           <span>Ubicación</span>
           <p>Charleston, South Carolina</p>
           <p>Pickup y delivery disponibles</p>
+          <p>Pagos: Zelle · Cash App · Venmo</p>
         </div>
         <small>© 2026 Vitalix. Hecho para ti.</small>
       </footer>
@@ -383,6 +386,14 @@ export default function Home() {
                 <select value={delivery} onChange={(event) => setDelivery(event.target.value)}>
                   <option>Pickup</option>
                   <option>Delivery</option>
+                </select>
+              </label>
+              <label>
+                Método de pago
+                <select value={payment} onChange={(event) => setPayment(event.target.value)}>
+                  <option>Zelle</option>
+                  <option>Cash App</option>
+                  <option>Venmo</option>
                 </select>
               </label>
               <label>
