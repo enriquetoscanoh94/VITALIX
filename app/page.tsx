@@ -501,7 +501,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Vitalix">
-          <img src="/images/vitalix-logo.jpeg" alt="Vitalix" />
+          <img src="/images/vitalix-logo-transparent.png" alt="Vitalix" />
         </a>
         <nav aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
           <a href="#productos">{t.navProducts}</a>
@@ -670,7 +670,7 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <img src="/images/vitalix-logo.jpeg" alt="Vitalix" />
+          <img src="/images/vitalix-logo-transparent.png" alt="Vitalix" />
           <p>{t.tagline}</p>
         </div>
         <div>
