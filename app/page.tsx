@@ -68,20 +68,19 @@ const products: Product[] = [
     facts: ["Pack de 5 botellas", "2 oz por shot", "Con jengibre"],
   },
   {
-    id: "jugo-natural",
-    name: "Jugo natural",
-    subtitle: "Botella individual de 500 ml",
+    id: "sunrise",
+    name: "Sunrise",
+    subtitle: "Jugo natural de 500 ml",
     price: 10,
     images: [
-      "/images/juices-on-ice.jpeg",
       "/images/jugo-natural-orange.jpeg",
-      "/images/red-energy-full.jpeg",
+      "/images/sunrise-detail.jpeg",
     ],
-    accent: "green",
-    badge: "100% natural",
+    accent: "gold",
+    badge: "Hidratación natural",
     description:
-      "Una alternativa fresca y deliciosa para reemplazar bebidas procesadas, acompañar tus comidas e hidratarte naturalmente.",
-    ingredients: "Elaborado con ingredientes naturales.",
+      "Una opción natural, fresca y sin conservantes para reemplazar bebidas procesadas y acompañar tus comidas.",
+    ingredients: "Piña, naranja, cúrcuma, jengibre y limón.",
     facts: ["Botella de 500 ml", "Sin azúcar añadida", "Sin conservantes"],
   },
   {
@@ -101,39 +100,6 @@ const products: Product[] = [
     ingredients:
       "Remolacha, naranja, manzana roja, piña, jengibre y limón.",
     facts: ["Botella de 500 ml", "Ingredientes frescos", "Sin conservantes"],
-  },
-  {
-    id: "sunrise",
-    name: "Sunrise",
-    subtitle: "Jugo natural de 500 ml",
-    price: 10,
-    images: [
-      "/images/jugo-natural-orange.jpeg",
-      "/images/sunrise-detail.jpeg",
-    ],
-    accent: "gold",
-    badge: "Hidratación natural",
-    description:
-      "Una opción natural, fresca y sin conservantes para reemplazar bebidas procesadas y acompañar tus comidas.",
-    ingredients: "Piña, naranja, cúrcuma, jengibre y limón.",
-    facts: ["Botella de 500 ml", "Sin azúcar añadida", "Sin conservantes"],
-  },
-  {
-    id: "jugo-detox",
-    name: "Jugo Detox",
-    subtitle: "Jugo verde natural",
-    price: 10,
-    images: [
-      "/images/fresh-pack-hero.jpeg",
-      "/images/detox-poster.jpeg",
-      "/images/detox-information.jpeg",
-    ],
-    accent: "green",
-    badge: "Jugo verde",
-    description:
-      "Jugo verde elaborado con ingredientes 100% naturales para acompañar tu bienestar diario de una forma fresca y práctica.",
-    ingredients: "Piña, apio, espinaca, manzana verde y pepino.",
-    facts: ["100% natural", "Jugo verde", "Disponibilidad por confirmar"],
   },
 ];
 
