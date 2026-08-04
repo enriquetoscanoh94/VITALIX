@@ -32,6 +32,7 @@ const products: Product[] = [
     },
     price: 29.99,
     images: [
+      assetPath("/images/fresh-pack-detox.jpeg"),
       assetPath("/images/fresh-pack-hero.jpeg"),
       assetPath("/images/fresh-pack-hand.jpeg"),
       assetPath("/images/fresh-pack-display.jpeg"),
@@ -39,8 +40,8 @@ const products: Product[] = [
     accent: "green",
     badge: { es: "El favorito", en: "The favorite" },
     description: {
-      es: "Frutas y vegetales picados y congelados para que prepares tu jugo verde en minutos. Solo agrega agua, licúa y disfruta.",
-      en: "Chopped and frozen fruits and vegetables so you can prepare your green juice in minutes. Just add water, blend and enjoy.",
+      es: "Un jugo verde detox es una bebida natural a base de verduras de hoja verde y frutas que sirve para mejorar la hidratación, aportar vitaminas y minerales, y apoyar la digestión. Frutas y vegetales picados y congelados para que lo prepares en minutos: solo agrega agua, licúa y disfruta.",
+      en: "A green detox juice is a natural drink made from leafy greens and fruits that helps improve hydration, provide vitamins and minerals, and support digestion. Chopped and frozen fruits and vegetables so you can prepare it in minutes: just add water, blend and enjoy.",
     },
     ingredients: {
       es: "Piña, manzana verde, pepino, apio, espinaca y jengibre.",
@@ -67,8 +68,8 @@ const products: Product[] = [
     accent: "gold",
     badge: { es: "Energía natural", en: "Natural energy" },
     description: {
-      es: "Shot amarillo de cúrcuma y jengibre para comenzar la mañana con energía natural y apoyar una rutina activa.",
-      en: "A yellow turmeric and ginger shot to start the morning with natural energy and support an active routine.",
+      es: "Nuestro shot de cúrcuma y pimienta negra sirve para desinflamar el cuerpo, acelerar el metabolismo y mejorar la digestión, funcionando como un apoyo natural para la pérdida de peso.",
+      en: "Our turmeric and black pepper shot helps reduce inflammation, speed up your metabolism and improve digestion, working as a natural support for weight loss.",
     },
     ingredients: {
       es: "Jengibre, cúrcuma, naranja y pimienta negra.",
@@ -95,8 +96,8 @@ const products: Product[] = [
     accent: "red",
     badge: { es: "Vitalidad", en: "Vitality" },
     description: {
-      es: "Shot rojo de remolacha y jengibre. Una mezcla refrescante pensada para acompañar tu bienestar cardiovascular y revitalizar tu piel.",
-      en: "A red beet and ginger shot. A refreshing blend designed to support cardiovascular wellness and revitalize your skin.",
+      es: "Nuestro Blood Shot combina ingredientes naturales cuidadosamente seleccionados para aportar hierro, ayudar a revitalizar la piel y apoyar la salud cardiovascular. Además, es una excelente fuente de antioxidantes que contribuyen al bienestar general y a comenzar el día con energía.",
+      en: "Our Blood Shot combines carefully selected natural ingredients to provide iron, help revitalize your skin and support cardiovascular health. It's also an excellent source of antioxidants that contribute to overall well-being and an energetic start to your day.",
     },
     ingredients: {
       es: "Remolacha, manzana roja, jengibre y limón.",
@@ -105,6 +106,34 @@ const products: Product[] = [
     facts: {
       es: ["Pack de 5 botellas", "2 oz por shot", "Con jengibre"],
       en: ["Pack of 5 bottles", "2 oz per shot", "Made with ginger"],
+    },
+  },
+  {
+    id: "radiant-shot",
+    name: "Radiant Shot",
+    subtitle: {
+      es: "Pack de 5 shots funcionales",
+      en: "Pack of 5 functional shots",
+    },
+    price: 14.99,
+    images: [
+      assetPath("/images/radiant-shot.jpeg"),
+      assetPath("/images/radiant-shot-group.jpeg"),
+      assetPath("/images/radiant-shot-detail.jpeg"),
+    ],
+    accent: "gold",
+    badge: { es: "Piel y visión", en: "Skin & vision" },
+    description: {
+      es: "Una mezcla natural de zanahoria, jengibre, naranja y limón, rica en betacarotenos, vitamina C y antioxidantes. Su contenido de vitamina A contribuye al mantenimiento de una visión saludable.",
+      en: "A natural blend of carrot, ginger, orange and lemon, rich in beta-carotene, vitamin C and antioxidants. Its vitamin A content helps maintain healthy vision.",
+    },
+    ingredients: {
+      es: "Zanahoria, naranja, limón y jengibre.",
+      en: "Carrot, orange, lemon and ginger.",
+    },
+    facts: {
+      es: ["Pack de 5 botellas", "2 oz por shot", "Rico en vitamina A"],
+      en: ["Pack of 5 bottles", "2 oz per shot", "Rich in vitamin A"],
     },
   },
   {
@@ -356,18 +385,24 @@ function ProductCard({
   product,
   quantity,
   language,
+  index,
   onChangeQuantity,
 }: {
   product: Product;
   quantity: number;
   language: Language;
+  index: number;
   onChangeQuantity: (id: string, delta: number) => void;
 }) {
   const [activeImage, setActiveImage] = useState(product.id === "fresh-pack" ? 2 : 0);
   const t = content[language];
 
   return (
-    <article className={`product-card ${product.accent}`}>
+    <article
+      className={`product-card ${product.accent}`}
+      data-reveal
+      style={{ transitionDelay: `${(index % 3) * 0.08}s` }}
+    >
       <div className="product-gallery">
         <div className="product-image">
           <img src={product.images[activeImage]} alt={`${product.name}, ${t.photo} ${activeImage + 1}`} />
@@ -446,6 +481,30 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>("[data-reveal]");
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const itemCount = Object.values(cart).reduce((sum, quantity) => sum + quantity, 0);
   const total = useMemo(
@@ -538,7 +597,7 @@ export default function Home() {
       </header>
 
       <section className="hero" id="inicio">
-        <div className="hero-copy">
+        <div className="hero-copy" data-reveal>
           <span className="eyebrow">{t.heroEyebrow}</span>
           <h1>
             {t.heroTitle}
@@ -566,7 +625,7 @@ export default function Home() {
             <span>{t.deliveryAvailable}</span>
           </div>
         </div>
-        <div className="hero-visual">
+        <div className="hero-visual" data-reveal>
           <img
             src={assetPath("/images/fresh-pack-display.jpeg")}
             alt="Fresh Pack de Vitalix con frutas frescas"
@@ -598,7 +657,7 @@ export default function Home() {
       </section>
 
       <section className="products-section" id="productos">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal>
           <div>
             <h2>
               {t.productsTitle.split("\n")[0]}<br />
@@ -609,19 +668,20 @@ export default function Home() {
         </div>
 
         <div className="product-grid">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <ProductCard
               key={product.id}
               product={product}
               quantity={cart[product.id] || 0}
               language={language}
+              index={index}
               onChangeQuantity={changeQuantity}
             />
           ))}
         </div>
       </section>
 
-      <section className="coming-soon">
+      <section className="coming-soon" data-reveal>
         <div>
           <h2>
             {t.comingTitle.split("\n")[0]}<br />
@@ -637,11 +697,11 @@ export default function Home() {
       </section>
 
       <section className="story-section" id="nosotros">
-        <div className="story-image">
+        <div className="story-image" data-reveal>
           <img src={assetPath("/images/shots-duo.jpeg")} alt="Golden Shot y Blood Shot Vitalix" />
           <span>Fresh · Natural · Vitalix</span>
         </div>
-        <div className="story-copy">
+        <div className="story-copy" data-reveal>
           <h2>{t.philosophyTitle}</h2>
           <p>{t.philosophyDescription}</p>
           <div className="story-stats">
@@ -664,9 +724,9 @@ export default function Home() {
           <p>{t.stepsDescription}</p>
         </div>
         <div className="steps">
-          <article><b>01</b><h3>{t.choose}</h3><p>{t.chooseDescription}</p></article>
-          <article><b>02</b><h3>{t.review}</h3><p>{t.reviewDescription}</p></article>
-          <article><b>03</b><h3>{t.order}</h3><p>{t.orderDescription}</p></article>
+          <article data-reveal><b>01</b><h3>{t.choose}</h3><p>{t.chooseDescription}</p></article>
+          <article data-reveal style={{ transitionDelay: "0.1s" }}><b>02</b><h3>{t.review}</h3><p>{t.reviewDescription}</p></article>
+          <article data-reveal style={{ transitionDelay: "0.2s" }}><b>03</b><h3>{t.order}</h3><p>{t.orderDescription}</p></article>
         </div>
       </section>
 
